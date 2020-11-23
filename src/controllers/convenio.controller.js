@@ -1,6 +1,6 @@
 const Convenio = require('../models/convenio.model')
-const jwt = require("jsonwebtoken")
-const fs = require("fs")
+const jwt = require('jsonwebtoken')
+const fs = require('fs')
 
 const Universidad = require('../models/universidad.model')
 //------------------------CRUD-----------------------------
@@ -21,11 +21,10 @@ function getConvenioById(req, res) {
 }
 
 function getAllConvenios(req, res) {
-  let token = req.header('Authorization').split(" ")
+  let token = req.header('Authorization').split(' ')
   var publicKey = fs.readFileSync('src/keys/jwt.pub')
   jwt.verify(token[1], publicKey, (err, decoded) => {
-    if (err) 
-      return res.status(401).send({ ok: false, error: err.message })
+    if (err) return res.status(401).send({ ok: false, error: err.message })
     Convenio.find({}, (err, convenios) => {
       if (err)
         return res
