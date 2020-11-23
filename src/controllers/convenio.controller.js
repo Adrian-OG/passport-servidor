@@ -1,4 +1,6 @@
 const Convenio = require('../models/convenio.model')
+const jwt = require("jsonwebtoken")
+const fs = require("fs")
 
 const Universidad = require('../models/universidad.model')
 //------------------------CRUD-----------------------------
@@ -17,17 +19,25 @@ function getConvenioById(req, res) {
     res.status(200).send({ convenio })
   })
 }
+
 function getAllConvenios(req, res) {
-  Convenio.find({}, (err, convenios) => {
-    if (err)
-      return res
-        .status(500)
-        .send({ message: 'Error al realizar la peticion: ' + err })
+  let token = req.header('Authorization').split(" ")
+  var publicKey = fs.readFileSync('src/keys/jwt.pub')
+  jwt.verify(token[1], publicKey, (err, decoded) => {
+    if (err) 
+      return res.status(401).send({ ok: false, error: err.message })
+    Convenio.find({}, (err, convenios) => {
+      if (err)
+        return res
+          .status(500)
+          .send({ message: 'Error al realizar la peticion: ' + err })
 
-    if (!convenios)
-      return res.status(404).send({ message: 'No existen convenios' })
+      if (!convenios)
+        return res.status(404).send({ message: 'No existen convenios' })
 
-    res.json({ ok: true, convenios })
+      res.json({ ok: true, convenios })
+      return
+    })
   })
 }
 
