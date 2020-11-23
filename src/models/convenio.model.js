@@ -2,17 +2,27 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const ConvenioSchema = Schema({
-  titulo: {
+  college: {
     type: String,
     required: true,
   },
-  inicio: {
+  start: {
     type: String,
     required: true,
   },
-  duracion: {
-    type: Number,
+  finish: {
+    type: String,
     required: true,
+  },
+  link_img: {
+    type: String,
+    required: true,
+  },
+  country: {
+    type: String,
+  },
+  country_code: {
+    type: String,
   },
 })
 

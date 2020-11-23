@@ -42,14 +42,17 @@ function getAllConvenios(req, res) {
 
 function saveConvenio(req, res) {
   let convenio = new Convenio()
-  convenio.titulo = req.body.titulo
-  convenio.inicio = req.body.inicio
-  convenio.duracion = req.body.duracion
+  convenio.college = req.body.college
+  convenio.start = req.body.start
+  convenio.finish = req.body.finish
+  convenio.link_img = req.body.link_img
+  convenio.country = req.body.country
+  convenio.country_code = req.body.country_code
   convenio.save((err, conveniostored) => {
     if (err)
       res
         .status(500)
-        .send({ message: 'error al salvar en la base de datos: ${err}' })
+        .send({ message: 'error al salvar en la base de datos: ' + err })
 
     res.status(200).send({ convenio: conveniostored })
   })
@@ -82,18 +85,6 @@ function deleteConvenio(req, res) {
 }
 
 //------------------------------------Vincular una universidad a un convenio-----------------------
-async function CreateConvenio(req, res) {
-  const { convenio, iduniversidad } = req.body
-  const universidad = await Universidad.findOne({
-    _id: iduniversidad,
-  })
-  const nuevoConvenio = new Convenio(convenio)
-  nuevoConvenio.save()
-  universidad.convenios.push(nuevoConvenio._id)
-  universidad.save()
-
-  res.json({ nuevoConvenio })
-}
 
 module.exports = {
   getConvenioById,

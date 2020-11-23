@@ -7,6 +7,6 @@ const universidadroute = require('./routes/universidad.route')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use('/api', convenioroute)
-app.use('/api', universidadroute)
+//app.use('/api', universidadroute)
 
 module.exports = app
