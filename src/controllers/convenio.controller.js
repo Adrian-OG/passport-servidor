@@ -1,5 +1,7 @@
 const Convenio = require('../models/convenio.model')
 
+const Universidad = require('../models/universidad.model')
+//------------------------CRUD-----------------------------
 function getConvenioById(req, res) {
   let convenioId = req.params.convenioId
 
@@ -59,15 +61,29 @@ function deleteConvenio(req, res) {
   let convenioId = req.params.convenioId
   Convenio.findById(convenioId, (err) => {
     if (err)
-      res.status(500).send({ message: 'Error al borrar el producto: ${err}' })
+      res.status(500).send({ message: 'Error al borrar el producto: ' + err })
 
     Convenio.remove((err) => {
       if (err)
-        res.status(500).send({ message: 'Error al borrar el producto: ${err}' })
+        res.status(500).send({ message: 'Error al borrar el producto: ' + err })
 
       res.status(200).send({ message: 'El producto ha sido eliminado' })
     })
   })
+}
+
+//------------------------------------Vincular una universidad a un convenio-----------------------
+async function CreateConvenio(req, res) {
+  const { convenio, iduniversidad } = req.body
+  const universidad = await Universidad.findOne({
+    _id: iduniversidad,
+  })
+  const nuevoConvenio = new Convenio(convenio)
+  nuevoConvenio.save()
+  universidad.convenios.push(nuevoConvenio._id)
+  universidad.save()
+
+  res.json({ nuevoConvenio })
 }
 
 module.exports = {
@@ -76,4 +92,5 @@ module.exports = {
   updateConvenio,
   saveConvenio,
   deleteConvenio,
+  CreateConvenio,
 }

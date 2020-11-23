@@ -16,4 +16,4 @@ const ConvenioSchema = Schema({
   },
 })
 
-module.exports = mongoose.model('Convenios', ConvenioSchema)
+module.exports = mongoose.model('convenios', ConvenioSchema)
