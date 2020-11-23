@@ -11,6 +11,9 @@ const UniversidadSchema = Schema(
       type: String,
       required: true,
     },
+    img: {
+      type: String,
+    },
 
     convenios: [
       {
