@@ -5,7 +5,7 @@ const api = express.Router()
 api.get('/convenio', conveniocontroller.getAllConvenios)
 api.get('/convenio/:productId', conveniocontroller.getConvenioById)
 api.post('/convenio/add', conveniocontroller.saveConvenio)
-//api.post('/convenio', conveniocontroller.CreateConvenio)
+
 api.put('/convenio:productId', conveniocontroller.updateConvenio)
 api.delete('/convenio:productId', conveniocontroller.deleteConvenio)
 

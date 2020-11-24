@@ -2,7 +2,6 @@ const Convenio = require('../models/convenio.model')
 const jwt = require('jsonwebtoken')
 const fs = require('fs')
 
-const Universidad = require('../models/universidad.model')
 //------------------------CRUD-----------------------------
 function getConvenioById(req, res) {
   let convenioId = req.params.convenioId
@@ -64,7 +63,7 @@ function updateConvenio(req, res) {
     if (err)
       res
         .status(500)
-        .send({ message: 'Error al actualizar el producto: ${err}' })
+        .send({ message: 'Error al actualizar el producto: ' + err })
 
     res.status(200).send({ convenio: convenioUpdated })
   })
