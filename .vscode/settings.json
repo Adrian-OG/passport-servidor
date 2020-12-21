@@ -1,9 +1,10 @@
 {
       "prettier.requireConfig": true,
-      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.defaultFormatter": "SimonSiefke.prettier-vscode",
       "editor.formatOnSave": true,
       "editor.formatOnPaste": true,
       "[javascript]": {
             "editor.defaultFormatter": "SimonSiefke.prettier-vscode"
-      }
+      },
+      "workbench.iconTheme": "vscode-icons"
 }
